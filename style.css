@@ -27,8 +27,27 @@
 
 body {
   font-family: "Advent Pro";
+  background-color: #007aff !important;
+  min-height: 100vh;
 }
 
 .d_none {
   display: none;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-quiz-card {
+  width: 25rem;
+}
+.questionFooter {
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
 }
