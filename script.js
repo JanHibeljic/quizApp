@@ -68,30 +68,11 @@ function init() {
 }
 
 function showQuestion() {
-  if (currentQuestion >= questions.length) {
-    //Show End Screen
-    document.getElementById("endScreen").style = "";
-    document.getElementById("questionBody").style = "display: none";
-    document.getElementById("CorrectAnswerTotal").innerHTML = questions.length;
-    document.getElementById("CorrectAnswer").innerHTML = rightQuestions;
-    document.getElementById("headerImage").src =
-      "./images/carnival-631151_1280.jpg";
+  if (gameIsOver()) {
+    showEndScreen();
   } else {
-    //Show Question
-    let percent = (currentQuestion + 1) / questions.length;
-    percent = Math.round(percent * 100);
-    document.getElementById("progressBar").innerHTML = `${percent}%`;
-    document.getElementById("progressBar").style = `width:${percent}%`;
-    console.log("fortschritt:", percent);
-    let question = questions[currentQuestion];
-    document.getElementById("currentQuestionSite").innerHTML =
-      currentQuestion + 1;
-
-    document.getElementById("questionText").innerHTML = question["question"];
-    document.getElementById("answer_1").innerHTML = question["answer_1"];
-    document.getElementById("answer_2").innerHTML = question["answer_2"];
-    document.getElementById("answer_3").innerHTML = question["answer_3"];
-    document.getElementById("answer_4").innerHTML = question["answer_4"];
+    updateProgressBar();
+    updateToNextQuestion();
   }
 }
 
@@ -150,4 +131,37 @@ function restartGame() {
   currentQuestion = 0;
   rightQuestions = 0;
   init();
+}
+
+function gameIsOver() {
+  return currentQuestion >= questions.length;
+}
+
+function showEndScreen() {
+  document.getElementById("endScreen").style = "";
+  document.getElementById("questionBody").style = "display: none";
+  document.getElementById("CorrectAnswerTotal").innerHTML = questions.length;
+  document.getElementById("CorrectAnswer").innerHTML = rightQuestions;
+  document.getElementById("headerImage").src =
+    "./images/carnival-631151_1280.jpg";
+}
+
+function updateProgressBar() {
+  let percent = (currentQuestion + 1) / questions.length;
+  percent = Math.round(percent * 100);
+  document.getElementById("progressBar").innerHTML = `${percent}%`;
+  document.getElementById("progressBar").style = `width:${percent}%`;
+  console.log("fortschritt:", percent);
+}
+
+function updateToNextQuestion() {
+  let question = questions[currentQuestion];
+  document.getElementById("currentQuestionSite").innerHTML =
+    currentQuestion + 1;
+
+  document.getElementById("questionText").innerHTML = question["question"];
+  document.getElementById("answer_1").innerHTML = question["answer_1"];
+  document.getElementById("answer_2").innerHTML = question["answer_2"];
+  document.getElementById("answer_3").innerHTML = question["answer_3"];
+  document.getElementById("answer_4").innerHTML = question["answer_4"];
 }
